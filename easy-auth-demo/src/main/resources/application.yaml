@@ -1,0 +1,24 @@
+server:
+  port: 30020
+
+spring:
+  freemarker:
+    suffix: .html
+    request-context-attribute: request
+  redis:
+    host: ${easy-auth.redis.host}
+    port: ${easy-auth.redis.port}
+  profiles:
+    active: dev
+
+logging:
+  level:
+    top.zhengru.sso: debug
+
+easy-auth:
+  sso:
+    #服务端地址
+    server-url: ${easy-auth.redis.server-url}
+    #客户端密钥信息
+    app-id: ${easy-auth.redis.app-id}
+    app-secret: ${easy-auth.redis.app-secret}

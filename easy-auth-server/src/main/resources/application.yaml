@@ -1,0 +1,26 @@
+server:
+  port: 30020
+
+spring:
+  freemarker:
+    suffix: .html
+    request-context-attribute: request
+  datasource:
+    url: jdbc:mysql://${easy-auth.datasource.url}:${easy-auth.datasource.port}/${easy-auth.datasource.database}?autoReconnect=true&useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8
+    username: ${easy-auth.datasource.username}
+    password: ${easy-auth.datasource.password}
+
+  redis:
+    host: ${easy-auth.redis.host}
+    port: ${easy-auth.redis.port}
+  profiles:
+    active: dev
+
+logging:
+  level:
+    top.zhengru.sso: debug
+
+easy-auth:
+  sso:
+    #服务端地址
+    server-url: ${easy-auth.redis.server-url}
