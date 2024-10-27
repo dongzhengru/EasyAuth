@@ -8,7 +8,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
  */
 public class Entity {
 
-    @TableId(type = IdType.AUTO)
+    @TableId(type = IdType.ASSIGN_ID)
     private Long id;
 
     public Long getId() {
