@@ -11,9 +11,19 @@ public class BaseConstant {
     public static final String LOGIN_PATH = "/sso/login";
 
     /**
+     * 服务端授权路径
+     */
+    public static final String AUTH_PATH = "/sso/auth";
+
+    /**
      * 服务端退出路径
      */
     public static final String LOGOUT_PATH = "/sso/logout";
+
+    /**
+     * 登录方式
+     */
+    public static final String LOGIN_TYPE = "loginType";
 
     /**
      * 服务端回调客户端地址参数名称
