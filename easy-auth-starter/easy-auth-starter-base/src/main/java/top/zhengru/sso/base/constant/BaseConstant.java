@@ -36,6 +36,11 @@ public class BaseConstant {
     public static final String LOGOUT_URI = "logoutUri";
 
     /**
+     * 服务端单点退出回调客户端退出参数名称
+     */
+    public static final String LOGOUT_PARAMETER_NAME = "logoutRequest";
+
+    /**
      * 授权方式
      */
     public static final String GRANT_TYPE = "grantType";

@@ -16,6 +16,13 @@ spring:
   profiles:
     active: dev
 
+mybatis-plus:
+  global-config:
+    db-config:
+      logic-delete-field: is_deleted
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+
 logging:
   level:
     top.zhengru.sso: debug

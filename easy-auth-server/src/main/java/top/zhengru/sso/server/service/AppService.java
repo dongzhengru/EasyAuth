@@ -10,4 +10,7 @@ import top.zhengru.sso.server.entity.App;
 */
 public interface AppService extends IService<App> {
 
+    void loginCheck(String appId, String redirectUri);
+
+    void authCheck(String appId, String appSecret);
 }

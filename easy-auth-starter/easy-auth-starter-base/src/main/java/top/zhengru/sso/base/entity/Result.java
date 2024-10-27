@@ -15,7 +15,7 @@ public class Result<T> {
     /**
      * 重定向
      */
-    public static final int REDIRECT_CODE = 1001;
+    public static final int REDIRECT_CODE = 1099;
 
     /**
      * 系统错误
@@ -51,7 +51,7 @@ public class Result<T> {
     }
 
     public static <T> Result<T> success() {
-        return new Result<>(SUCCESS_CODE, "成功");
+        return new Result<>(SUCCESS_CODE, "OK");
     }
 
     public static <T> Result<T> success(T data) {
@@ -61,7 +61,7 @@ public class Result<T> {
     }
 
     public static <T> Result<T> redirect() {
-        return new Result<>(REDIRECT_CODE, "重定向");
+        return new Result<>(REDIRECT_CODE, "REDIRECT");
     }
 
     public static <T> Result<T> redirect(T data) {
@@ -71,7 +71,7 @@ public class Result<T> {
     }
 
     public static <T> Result<T> error() {
-        return new Result<>(ERROR_CODE, "系统执行出错");
+        return new Result<>(ERROR_CODE, "ERROR");
     }
 
     public static <T> Result<T> error(String message) {

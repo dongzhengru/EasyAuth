@@ -29,7 +29,7 @@ public class User extends BaseEntity {
 	private String password;
 
 	/** 最后登录时间 */
-	private LocalDateTime lastLoginTime;
+	private Date lastLoginTime;
 
 	/** 登录总次数 */
 	private Integer loginCount;
@@ -40,7 +40,7 @@ public class User extends BaseEntity {
 	public User() {
 	}
 
-	public User(String name, String phone, String cardNo, String email, String username, String password, LocalDateTime lastLoginTime, Integer loginCount, Boolean isEnable) {
+	public User(String name, String phone, String cardNo, String email, String username, String password, Date lastLoginTime, Integer loginCount, Boolean isEnable) {
 		this.name = name;
 		this.phone = phone;
 		this.cardNo = cardNo;
@@ -100,11 +100,11 @@ public class User extends BaseEntity {
 		this.password = password;
 	}
 
-	public LocalDateTime getLastLoginTime() {
+	public Date getLastLoginTime() {
 		return lastLoginTime;
 	}
 
-	public void setLastLoginTime(LocalDateTime lastLoginTime) {
+	public void setLastLoginTime(Date lastLoginTime) {
 		this.lastLoginTime = lastLoginTime;
 	}
 
@@ -116,11 +116,11 @@ public class User extends BaseEntity {
 		this.loginCount = loginCount;
 	}
 
-	public Boolean getEnable() {
+	public Boolean getIsEnable() {
 		return isEnable;
 	}
 
-	public void setEnable(Boolean enable) {
-		isEnable = enable;
+	public void setIsEnable(Boolean isEnable) {
+		this.isEnable = isEnable;
 	}
 }

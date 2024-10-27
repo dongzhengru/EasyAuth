@@ -2,6 +2,7 @@ package top.zhengru.sso.server.entity;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableLogic;
 
 import java.util.Date;
 
@@ -29,6 +30,7 @@ public class BaseEntity extends Entity {
     protected Date updateTime;
 
     @TableField(value = "is_deleted")
+    @TableLogic
     public Integer isDeleted;
 
     public Long getCreateBy() {

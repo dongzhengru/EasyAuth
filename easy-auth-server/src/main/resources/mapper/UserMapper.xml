@@ -8,7 +8,7 @@
             <id property="id" column="id" jdbcType="BIGINT"/>
             <result property="name" column="name" jdbcType="VARCHAR"/>
             <result property="phone" column="phone" jdbcType="VARCHAR"/>
-            <result property="cardNo" column="cardno" jdbcType="VARCHAR"/>
+            <result property="cardNo" column="card_no" jdbcType="VARCHAR"/>
             <result property="email" column="email" jdbcType="VARCHAR"/>
             <result property="username" column="username" jdbcType="VARCHAR"/>
             <result property="password" column="password" jdbcType="VARCHAR"/>
@@ -24,7 +24,7 @@
 
     <sql id="Base_Column_List">
         id,name,phone,
-        cardno,email,username,
+        card_no,email,username,
         password,last_login_time,login_count,
         is_enable,create_by,update_by,
         create_time,update_time,is_deleted

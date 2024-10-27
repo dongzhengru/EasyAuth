@@ -7,7 +7,7 @@ import top.zhengru.sso.base.entity.TokenUser;
  */
 public class TokenContent extends CodeContent {
 
-    private String accessToken;
+    private String appToken;
     private TokenUser tokenUser;
     private String logoutUri;
 
@@ -16,24 +16,24 @@ public class TokenContent extends CodeContent {
     }
 
     public TokenContent(String accessToken, TokenUser tokenUser, String logoutUri) {
-        this.accessToken = accessToken;
+        this.appToken = accessToken;
         this.tokenUser = tokenUser;
         this.logoutUri = logoutUri;
     }
 
-    public TokenContent(String tgt, String clientId, String accessToken, TokenUser tokenUser, String logoutUri) {
-        super(tgt, clientId);
-        this.accessToken = accessToken;
+    public TokenContent(String tgt, String appId, String appToken, TokenUser tokenUser, String logoutUri) {
+        super(tgt, appId);
+        this.appToken = appToken;
         this.tokenUser = tokenUser;
         this.logoutUri = logoutUri;
     }
 
-    public String getAccessToken() {
-        return accessToken;
+    public String getAppToken() {
+        return appToken;
     }
 
-    public void setAccessToken(String accessToken) {
-        this.accessToken = accessToken;
+    public void setAppToken(String appToken) {
+        this.appToken = appToken;
     }
 
     public TokenUser getTokenUser() {
@@ -50,5 +50,14 @@ public class TokenContent extends CodeContent {
 
     public void setLogoutUri(String logoutUri) {
         this.logoutUri = logoutUri;
+    }
+
+    @Override
+    public String toString() {
+        return "TokenContent{" +
+                "appToken='" + appToken + '\'' +
+                ", tokenUser=" + tokenUser +
+                ", logoutUri='" + logoutUri + '\'' +
+                '}';
     }
 }

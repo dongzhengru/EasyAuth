@@ -1,6 +1,7 @@
 package top.zhengru.sso.server.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import top.zhengru.sso.base.entity.TokenUser;
 import top.zhengru.sso.server.entity.User;
 
 /**
@@ -10,4 +11,7 @@ import top.zhengru.sso.server.entity.User;
 */
 public interface UserService extends IService<User> {
 
+    TokenUser login(String username, String password);
+
+    User selectByUsername(String username);
 }

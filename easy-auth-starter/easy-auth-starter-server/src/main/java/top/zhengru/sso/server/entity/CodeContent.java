@@ -6,14 +6,14 @@ package top.zhengru.sso.server.entity;
 public class CodeContent {
 
     private String tgt;
-    private String clientId;
+    private String appId;
 
     public CodeContent() {
     }
 
-    public CodeContent(String tgt, String clientId) {
+    public CodeContent(String tgt, String appId) {
         this.tgt = tgt;
-        this.clientId = clientId;
+        this.appId = appId;
     }
 
     public String getTgt() {
@@ -24,11 +24,11 @@ public class CodeContent {
         this.tgt = tgt;
     }
 
-    public String getClientId() {
-        return clientId;
+    public String getAppId() {
+        return appId;
     }
 
-    public void setClientId(String clientId) {
-        this.clientId = clientId;
+    public void setAppId(String appId) {
+        this.appId = appId;
     }
 }
