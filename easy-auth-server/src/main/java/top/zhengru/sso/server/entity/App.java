@@ -2,8 +2,6 @@ package top.zhengru.sso.server.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 
-import java.time.LocalDateTime;
-
 /**
  * 应用
  */
@@ -55,10 +53,13 @@ public class App extends BaseEntity {
 	/** 排序字段 */
 	private Integer sort;
 
+	/** 开发者 */
+	private Long developer;
+
 	public App() {
 	}
 
-	public App(Integer appType, Integer serviceType, String name, String description, String icon, String iconUrl, Long appId, String appSecret, String homePage, Integer auditStatus, String auditMsg, Integer publishStatus, String appVersion, Integer shelveStatus, Integer sort) {
+	public App(Integer appType, Integer serviceType, String name, String description, String icon, String iconUrl, Long appId, String appSecret, String homePage, Integer auditStatus, String auditMsg, Integer publishStatus, String appVersion, Integer shelveStatus, Integer sort, Long developer) {
 		this.appType = appType;
 		this.serviceType = serviceType;
 		this.name = name;
@@ -74,6 +75,7 @@ public class App extends BaseEntity {
 		this.appVersion = appVersion;
 		this.shelveStatus = shelveStatus;
 		this.sort = sort;
+		this.developer = developer;
 	}
 
 	public Integer getAppType() {
@@ -194,5 +196,13 @@ public class App extends BaseEntity {
 
 	public void setSort(Integer sort) {
 		this.sort = sort;
+	}
+
+	public Long getDeveloper() {
+		return developer;
+	}
+
+	public void setDeveloper(Long developer) {
+		this.developer = developer;
 	}
 }
