@@ -1,7 +1,8 @@
 package top.zhengru.sso.client;
 
-import top.zhengru.sso.client.constant.ClientConstant;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 
+@ConfigurationProperties("easy-auth.sso.client")
 public class ClientProperties {
 
     /**
@@ -20,27 +21,52 @@ public class ClientProperties {
     private String appSecret;
 
     /**
-     * 拦截urls，默认拦截全路径
+     * 应用默认回调地址
      */
-    private String[] urlPatterns = {ClientConstant.URL_FUZZY_MATCH};
-
-    /**
-     * 忽略拦截urls
-     */
-    private String[] excludeUrls;
-
-    /**
-     * 过滤器排序，默认10
-     */
-    private int order = 10;
+    private String defaultCallbackUrl;
 
     /**
      * 客户端注销地址
      */
-    private String logoutPath = "/logout";
+    private String logoutUrl;
 
-    /**
-     * 存放在cookie或者Header中的token名称
-     */
-    private String tokenName = "easy-auth-token";
+    public String getServerUrl() {
+        return serverUrl;
+    }
+
+    public void setServerUrl(String serverUrl) {
+        this.serverUrl = serverUrl;
+    }
+
+    public String getAppId() {
+        return appId;
+    }
+
+    public void setAppId(String appId) {
+        this.appId = appId;
+    }
+
+    public String getAppSecret() {
+        return appSecret;
+    }
+
+    public void setAppSecret(String appSecret) {
+        this.appSecret = appSecret;
+    }
+
+    public String getDefaultCallbackUrl() {
+        return defaultCallbackUrl;
+    }
+
+    public void setDefaultCallbackUrl(String defaultCallbackUrl) {
+        this.defaultCallbackUrl = defaultCallbackUrl;
+    }
+
+    public String getLogoutUrl() {
+        return logoutUrl;
+    }
+
+    public void setLogoutUrl(String logoutUrl) {
+        this.logoutUrl = logoutUrl;
+    }
 }

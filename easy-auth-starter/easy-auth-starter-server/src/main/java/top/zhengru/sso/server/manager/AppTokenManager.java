@@ -77,7 +77,7 @@ public class AppTokenManager extends AbstractAppTokenManager {
             if (tokenContent == null) {
                 return;
             }
-            // 删除accessToken
+            // 删除appToken
             redisTemplate.delete(SSO_PREFIX + APP_TOKEN_KEY + appToken);
 
             // 发起客户端退出请求

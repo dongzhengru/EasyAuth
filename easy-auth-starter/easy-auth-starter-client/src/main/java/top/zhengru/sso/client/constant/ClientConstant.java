@@ -6,6 +6,21 @@ package top.zhengru.sso.client.constant;
 public class ClientConstant {
 
     /**
+     * 获取认证中心登录地址接口路径
+     */
+    public static final String LOGIN_URL_PATH = "/sso/login/loginUrl";
+
+    /**
+     * 认证中心申请应用凭证接口路径
+     */
+    public static final String AUTH_PATH = "/sso/auth";
+
+    /**
+     * 认证中心统一注销接口路径
+     */
+    public static final String LOGOUT_PATH = "/sso/logout";
+
+    /**
      * 模糊匹配后缀
      */
     public static final String URL_FUZZY_MATCH = "/*";

@@ -40,3 +40,5 @@ build/
 /easy-auth-server/src/main/resources/application-dev.yaml
 /easy-auth-demo/src/main/resources/application-prod.yaml
 /easy-auth-server/src/main/resources/application-prod.yaml
+/easy-auth-unified-portal/src/main/resources/application-dev.yaml
+/easy-auth-unified-portal/src/main/resources/application-prod.yaml

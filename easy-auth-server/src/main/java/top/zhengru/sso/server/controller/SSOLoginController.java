@@ -1,13 +1,11 @@
 package top.zhengru.sso.server.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import top.zhengru.sso.base.constant.BaseConstant;
 import top.zhengru.sso.base.entity.Result;
 import top.zhengru.sso.base.entity.TokenUser;
+import top.zhengru.sso.server.ServerProperties;
 import top.zhengru.sso.server.manager.AbstractCodeManager;
 import top.zhengru.sso.server.manager.AbstractTicketGrantingTicketManager;
 import top.zhengru.sso.server.service.AppService;
@@ -34,9 +32,27 @@ public class SSOLoginController {
     private UserService userService;
     @Autowired
     private AppService appService;
+    @Autowired
+    private ServerProperties serverProperties;
 
     /**
-     * 登录提交
+     * 获取认证中心登录地址
+     *
+     * @param appId
+     * @param appSecret
+     * @return
+     */
+    @PostMapping("/loginUrl")
+    public Result<String> loginUrl(
+            @RequestParam(value = BaseConstant.APP_ID) String appId,
+            @RequestParam(value = BaseConstant.APP_SECRET) String appSecret) {
+        appService.authCheck(appId, appSecret);
+        return Result.success(serverProperties.getServerLoginUrl());
+    }
+
+
+    /**
+     * 认证中心登录提交
      *
      * @param redirectUri
      * @param appId
@@ -57,8 +73,6 @@ public class SSOLoginController {
         TokenUser tokenUser = new TokenUser();
 
         // 校验appId是否存在、redirectUri是否合法
-        System.out.println("appId = " + appId);
-        System.out.println("redirectUri = " + redirectUri);
         appService.loginCheck(appId, redirectUri);
 
         // 判断Header是否存在有效的TGT

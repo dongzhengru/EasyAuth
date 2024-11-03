@@ -37,7 +37,7 @@ public class SSOAuthController {
     private AppService appService;
 
     /**
-     * 校验授权码颁发应用AppToken
+     * 使用临时授权码申请应用凭证
      *
      * @param logoutUri
      * @param appId
@@ -53,6 +53,8 @@ public class SSOAuthController {
             @RequestParam String code) {
         // 校验code和app查询user生成token返回
         CodeContent codeContent = codeManager.get(code);
+        // 授权码Code使用即失效
+        codeManager.remove(code);
         TokenUser tokenUser = ticketGrantingTicketManager.get(codeContent.getTgt());
         if (!Objects.equals(codeContent.getAppId(), appId)) {
             throw new EasyAuthServerException(AuthMsgConstant.ILLEGAL_APP_REQUEST);

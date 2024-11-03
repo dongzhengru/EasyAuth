@@ -29,5 +29,8 @@ logging:
 
 easy-auth:
   sso:
-    #服务端地址
-    server-url: ${easy-auth.redis.server-url}
+    server:
+      #认证中心登录地址
+      server-login-url: ${easy-auth.sso.server-login-url}
+      #是否允许多端在线
+      multi-device-online-allowed: ${easy-auth.sso.multi-device-online-allowed}

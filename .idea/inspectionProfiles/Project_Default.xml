@@ -5,6 +5,7 @@
       <option name="customHeaders">
         <set>
           <option value="X-TGT" />
+          <option value="Access-Control-Expose-Headers" />
         </set>
       </option>
     </inspection_tool>

@@ -17,4 +17,11 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <dependencies>
+        <dependency>
+            <groupId>top.zhengru</groupId>
+            <artifactId>easy-auth-starter-client</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+    </dependencies>
 </project>

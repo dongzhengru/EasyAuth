@@ -2,7 +2,7 @@ package top.zhengru.sso.server;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-@ConfigurationProperties("easy-auth.server")
+@ConfigurationProperties("easy-auth.sso.server")
 public class ServerProperties {
 
     /*
@@ -19,6 +19,16 @@ public class ServerProperties {
      * 单点登录（TGT凭证）失效时间，默认24小时（单位秒）
      */
     private int tgtTimeout = 60 * 60 * 24;
+
+    /*
+     * 认证中心登录地址
+     */
+    private String serverLoginUrl;
+
+    /*
+     * 是否允许多端在线
+     */
+    private boolean isMultiDeviceOnlineAllowed = false;
 
     public int getCodeTimeout() {
         return codeTimeout;
@@ -42,5 +52,21 @@ public class ServerProperties {
 
     public void setTgtTimeout(int tgtTimeout) {
         this.tgtTimeout = tgtTimeout;
+    }
+
+    public String getServerLoginUrl() {
+        return serverLoginUrl;
+    }
+
+    public void setServerLoginUrl(String serverLoginUrl) {
+        this.serverLoginUrl = serverLoginUrl;
+    }
+
+    public boolean isMultiDeviceOnlineAllowed() {
+        return isMultiDeviceOnlineAllowed;
+    }
+
+    public void setMultiDeviceOnlineAllowed(boolean multiDeviceOnlineAllowed) {
+        isMultiDeviceOnlineAllowed = multiDeviceOnlineAllowed;
     }
 }

@@ -59,4 +59,10 @@ public class BaseConstant {
      * 授权码
      */
     public static final String AUTH_CODE = "code";
+
+
+    /**
+     * 应用凭证
+     */
+    public static final String APP_TOKEN = "appToken";
 }
