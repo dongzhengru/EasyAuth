@@ -5,12 +5,23 @@ spring:
   freemarker:
     suffix: .html
     request-context-attribute: request
+  datasource:
+    url: jdbc:mysql://${easy-auth.datasource.url}:${easy-auth.datasource.port}/${easy-auth.datasource.database}?autoReconnect=true&useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8
+    username: ${easy-auth.datasource.username}
+    password: ${easy-auth.datasource.password}
   redis:
     host: ${easy-auth.redis.host}
     port: ${easy-auth.redis.port}
     database: ${easy-auth.redis.database}
   profiles:
     active: dev
+
+mybatis-plus:
+  global-config:
+    db-config:
+      logic-delete-field: is_deleted
+      logic-delete-value: 1
+      logic-not-delete-value: 0
 
 logging:
   level:

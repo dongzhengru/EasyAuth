@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.zhengru.sso.unified.mapper.AppApplyHistoryMapper">
+
+    <resultMap id="BaseResultMap" type="top.zhengru.sso.unified.entity.AppApplyHistory">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="appId" column="app_id" jdbcType="BIGINT"/>
+            <result property="sort" column="sort" jdbcType="INTEGER"/>
+            <result property="auditStatus" column="audit_status" jdbcType="INTEGER"/>
+            <result property="updateMsg" column="update_msg" jdbcType="VARCHAR"/>
+            <result property="auditMsg" column="audit_msg" jdbcType="VARCHAR"/>
+            <result property="createBy" column="create_by" jdbcType="BIGINT"/>
+            <result property="updateBy" column="update_by" jdbcType="BIGINT"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+            <result property="isDeleted" column="is_deleted" jdbcType="TINYINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,app_id,sort,
+        audit_status,update_msg,audit_msg,
+        create_by,update_by,create_time,
+        update_time,is_deleted
+    </sql>
+</mapper>

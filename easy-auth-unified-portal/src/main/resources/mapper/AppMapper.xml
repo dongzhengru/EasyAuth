@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.zhengru.sso.unified.mapper.AppMapper">
+
+    <resultMap id="BaseResultMap" type="top.zhengru.sso.unified.entity.App">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="appType" column="app_type" jdbcType="INTEGER"/>
+            <result property="serviceType" column="service_type" jdbcType="INTEGER"/>
+            <result property="name" column="name" jdbcType="VARCHAR"/>
+            <result property="description" column="description" jdbcType="VARCHAR"/>
+            <result property="icon" column="icon" jdbcType="VARCHAR"/>
+            <result property="iconUrl" column="icon_url" jdbcType="VARCHAR"/>
+            <result property="appId" column="app_id" jdbcType="BIGINT"/>
+            <result property="appSecret" column="app_secret" jdbcType="VARCHAR"/>
+            <result property="homePage" column="home_page" jdbcType="VARCHAR"/>
+            <result property="auditStatus" column="audit_status" jdbcType="INTEGER"/>
+            <result property="auditMsg" column="audit_msg" jdbcType="VARCHAR"/>
+            <result property="publishStatus" column="publish_status" jdbcType="INTEGER"/>
+            <result property="appVersion" column="app_version" jdbcType="VARCHAR"/>
+            <result property="shelveStatus" column="shelve_status" jdbcType="INTEGER"/>
+            <result property="sort" column="sort" jdbcType="INTEGER"/>
+            <result property="developer" column="developer" jdbcType="BIGINT"/>
+            <result property="createBy" column="create_by" jdbcType="BIGINT"/>
+            <result property="updateBy" column="update_by" jdbcType="BIGINT"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+            <result property="isDeleted" column="is_deleted" jdbcType="TINYINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,app_type,service_type,
+        name,description,icon,
+        icon_url,app_id,app_secret,
+        home_page,audit_status,audit_msg,
+        publish_status,app_version,shelve_status,
+        sort,developer,create_by,
+        update_by,create_time,update_time,
+        is_deleted
+    </sql>
+    <select id="queryApplicationInfoList" resultType="top.zhengru.sso.unified.vo.AppInfoVo">
+        SELECT
+            id,
+            app_type,
+            service_type,
+            name,
+            description,
+            icon,
+            icon_url,
+            home_page,
+            app_version,
+            sort
+        FROM
+            sys_app
+        WHERE
+            publish_status = #{param.publishStatus}
+            AND audit_status = #{param.auditStatus}
+            AND shelve_status = #{param.shelveStatus}
+            <if test="param.name != null and param.name != ''">
+                AND name like concat('%', #{param.name}, '%')
+            </if>
+        ORDER BY
+            sort
+    </select>
+</mapper>

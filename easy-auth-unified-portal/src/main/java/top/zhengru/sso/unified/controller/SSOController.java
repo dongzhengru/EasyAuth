@@ -1,4 +1,4 @@
-package top.zhengru.sso.demo.controller;
+package top.zhengru.sso.unified.controller;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -13,8 +13,6 @@ import java.util.UUID;
 
 /**
  * 应用凭证AppToken管理抽象
- *
- * @author Joe
  */
 public abstract class AbstractAppTokenManager implements LifecycleManager<TokenContent> {
 

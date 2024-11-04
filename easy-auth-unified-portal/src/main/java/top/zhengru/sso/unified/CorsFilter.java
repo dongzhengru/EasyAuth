@@ -12,8 +12,6 @@ import java.io.IOException;
 /**
  * 跨域过滤器
  * 注：跨域过滤器@Order设置的数值，必须要优先级高于ClientContainer设置的Order，详见ClientProperties.order属性
- *
- * @author Joe
  */
 @Order(5)
 @WebFilter
