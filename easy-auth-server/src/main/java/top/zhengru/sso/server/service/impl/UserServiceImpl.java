@@ -27,9 +27,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
     public TokenUser login(String username, String password) {
         User user = selectByUsername(username);
         if (user == null) {
-            throw new EasyAuthServerException("用户不存在");
+            throw new EasyAuthServerException("账号或密码有误，请重新输入");
         } else if (!user.getPassword().equals(PasswordHelper.encrypt(new String(Base64.getDecoder().decode(password))))) {
-            throw new EasyAuthServerException("密码不正确");
+            throw new EasyAuthServerException("账号或密码有误，请重新输入");
         } else if (!user.getIsEnable()) {
             throw new EasyAuthServerException("账号已被禁用");
         } else {

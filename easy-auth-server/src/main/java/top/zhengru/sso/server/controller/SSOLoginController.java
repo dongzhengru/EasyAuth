@@ -50,7 +50,6 @@ public class SSOLoginController {
         return Result.success(serverProperties.getServerLoginUrl());
     }
 
-
     /**
      * 认证中心登录提交
      *
@@ -87,6 +86,10 @@ public class SSOLoginController {
         // 指定loginType登录校验
         if (Objects.equals(loginType, "account")) {
             tokenUser = userService.login(username, password);
+        } else if (Objects.equals(loginType, "tgt")) {
+            return Result.error("登录过期，请重新登录");
+        } else {
+            return Result.error("登录异常");
         }
         tgt = ticketGrantingTicketManager.getOrCreate(tokenUser, request, response);
         // 生成授权码code并返回重定向地址
