@@ -6,10 +6,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import top.zhengru.sso.base.entity.Result;
+import top.zhengru.sso.unified.entity.PageResult;
 import top.zhengru.sso.unified.param.AppApplyParam;
 import top.zhengru.sso.unified.param.AppAuditParam;
+import top.zhengru.sso.unified.param.AppQueryParam;
 import top.zhengru.sso.unified.service.AppApplyHistoryService;
 import top.zhengru.sso.unified.service.AppService;
+import top.zhengru.sso.unified.vo.AppDevInfoVo;
+import top.zhengru.sso.unified.vo.AppInfoVo;
 
 /**
  * @Author: dongzhengru
@@ -25,6 +29,16 @@ public class AppManagementController {
     AppService appService;
     @Autowired
     AppApplyHistoryService appApplyHistoryService;
+
+    /**
+     * 查询我创建的应用
+     *
+     * @return
+     */
+    @PostMapping("/query-my-app")
+    public Result<PageResult<AppDevInfoVo>> queryMyApp(@RequestBody AppQueryParam appQueryParam) {
+        return Result.success(appService.queryMyApp(appQueryParam));
+    }
 
     /**
      * 应用申请

@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import top.zhengru.sso.unified.entity.App;
 import top.zhengru.sso.unified.param.AppQueryParam;
+import top.zhengru.sso.unified.vo.AppDevInfoVo;
 import top.zhengru.sso.unified.vo.AppInfoVo;
 
 import java.util.List;
@@ -19,6 +20,8 @@ import java.util.List;
 public interface AppMapper extends BaseMapper<App> {
 
     List<AppInfoVo> queryApplicationInfoList(@Param("param") AppQueryParam appQueryParam);
+
+    List<AppDevInfoVo> queryApplicationDevInfoList(@Param("userId") Long userId, @Param("param") AppQueryParam appQueryParam);
 }
 
 

@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.transaction.annotation.Transactional;
 import top.zhengru.sso.unified.entity.App;
 import top.zhengru.sso.unified.entity.AppApplyHistory;
@@ -35,6 +36,7 @@ public class AppApplyHistoryServiceImpl extends ServiceImpl<AppApplyHistoryMappe
     @Override
     @Transactional
     public void apply(AppApplyParam appApplyParam) {
+        UserDetailImpl userInfo = getUserDetail();
         isAppNameExists(appApplyParam.getName());
         App insApp = new App();
         BeanUtils.copyProperties(appApplyParam, insApp);
@@ -43,9 +45,7 @@ public class AppApplyHistoryServiceImpl extends ServiceImpl<AppApplyHistoryMappe
         insApp.setPublishStatus(0);
         insApp.setShelveStatus(0);
         insApp.setSort(99);
-        // TODO 从上下文获取应用开发者
-//        insApp.setDeveloper();
-        // 插入后获取id
+        insApp.setDeveloper(userInfo.getId());
         AppApplyHistory insAppApplyHistory = new AppApplyHistory();
         BeanUtils.copyProperties(insApp, insAppApplyHistory);
         appMapper.insert(insApp);
@@ -88,6 +88,15 @@ public class AppApplyHistoryServiceImpl extends ServiceImpl<AppApplyHistoryMappe
         queryWrapper.eq(App::getAppId, appId);
         long count = appMapper.selectCount(queryWrapper);
         return count > 0;
+    }
+
+    /**
+     * 获取当前用户信息
+     *
+     * @return
+     */
+    private UserDetailImpl getUserDetail() {
+        return (UserDetailImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
 }
 

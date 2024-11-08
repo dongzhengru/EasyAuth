@@ -5,6 +5,7 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 import top.zhengru.sso.unified.entity.App;
@@ -12,6 +13,7 @@ import top.zhengru.sso.unified.entity.PageResult;
 import top.zhengru.sso.unified.mapper.AppMapper;
 import top.zhengru.sso.unified.param.AppQueryParam;
 import top.zhengru.sso.unified.service.AppService;
+import top.zhengru.sso.unified.vo.AppDevInfoVo;
 import top.zhengru.sso.unified.vo.AppInfoVo;
 
 import java.util.List;
@@ -37,6 +39,27 @@ public class AppServiceImpl extends ServiceImpl<AppMapper, App>
         List<AppInfoVo> appList = appMapper.queryApplicationInfoList(appQueryParam);
         PageInfo<AppInfoVo> pageInfo = new PageInfo<>(appList);
         return new PageResult<>(pageInfo.getTotal(), pageInfo.getList());
+    }
+
+    @Override
+    public PageResult<AppDevInfoVo> queryMyApp(AppQueryParam appQueryParam) {
+        UserDetailImpl userInfo = getUserDetail();
+        PageHelper.startPage(appQueryParam.getPageNo(), appQueryParam.getPageSize());
+        appQueryParam.setAuditStatus(1);
+        appQueryParam.setPublishStatus(1);
+        appQueryParam.setShelveStatus(1);
+        List<AppDevInfoVo> appList = appMapper.queryApplicationDevInfoList(userInfo.getId(), appQueryParam);
+        PageInfo<AppDevInfoVo> pageInfo = new PageInfo<>(appList);
+        return new PageResult<>(pageInfo.getTotal(), pageInfo.getList());
+    }
+
+    /**
+     * 获取当前用户信息
+     *
+     * @return
+     */
+    private UserDetailImpl getUserDetail() {
+        return (UserDetailImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
 }
 

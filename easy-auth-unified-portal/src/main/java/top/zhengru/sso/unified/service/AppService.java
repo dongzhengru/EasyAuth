@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import top.zhengru.sso.unified.entity.App;
 import top.zhengru.sso.unified.entity.PageResult;
 import top.zhengru.sso.unified.param.AppQueryParam;
+import top.zhengru.sso.unified.vo.AppDevInfoVo;
 import top.zhengru.sso.unified.vo.AppInfoVo;
 
 import java.util.List;
@@ -20,4 +21,6 @@ import java.util.List;
 public interface AppService extends IService<App> {
 
     PageResult<AppInfoVo> queryApplicationInfoList(AppQueryParam appQueryParam);
+
+    PageResult<AppDevInfoVo> queryMyApp(AppQueryParam appQueryParam);
 }

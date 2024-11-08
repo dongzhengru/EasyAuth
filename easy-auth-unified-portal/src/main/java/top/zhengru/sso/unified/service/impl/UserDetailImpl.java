@@ -11,6 +11,9 @@ import java.util.List;
 
 public class UserDetailImpl implements UserDetails, Serializable {
 
+    /** ID */
+    private Long id;
+
     /** 姓名 */
     private String name;
 
@@ -51,7 +54,8 @@ public class UserDetailImpl implements UserDetails, Serializable {
 
     private List<GrantedAuthorityImpl> authorities;
 
-    public UserDetailImpl(String name, String phone, String cardNo, String email, String username, String password, List<String> roles, List<GrantedAuthorityImpl> authorities) {
+    public UserDetailImpl(Long id, String name, String phone, String cardNo, String email, String username, String password, List<String> roles, List<GrantedAuthorityImpl> authorities) {
+        this.id = id;
         this.name = name;
         this.phone = phone;
         this.cardNo = cardNo;
@@ -62,7 +66,7 @@ public class UserDetailImpl implements UserDetails, Serializable {
         this.authorities = authorities;
     }
 
-    public UserDetailImpl(String name, String phone, String cardNo, String email, String username, String password, Date lastLoginTime, Integer loginCount, boolean accountNonExpired, boolean accountNonLocked, boolean credentialsNonExpired, Boolean enabled, List<String> roles, List<GrantedAuthorityImpl> authorities) {
+    public UserDetailImpl(Long id, String name, String phone, String cardNo, String email, String username, String password, Date lastLoginTime, Integer loginCount, boolean accountNonExpired, boolean accountNonLocked, boolean credentialsNonExpired, Boolean enabled, List<String> roles, List<GrantedAuthorityImpl> authorities) {
         this.name = name;
         this.phone = phone;
         this.cardNo = cardNo;
@@ -77,6 +81,14 @@ public class UserDetailImpl implements UserDetails, Serializable {
         this.enabled = enabled;
         this.roles = roles;
         this.authorities = authorities;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public void setAccountNonExpired(boolean accountNonExpired) {

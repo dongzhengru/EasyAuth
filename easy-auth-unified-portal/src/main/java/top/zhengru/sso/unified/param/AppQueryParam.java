@@ -6,7 +6,7 @@ package top.zhengru.sso.unified.param;
  * @Date: 2024/11/3
  * @Time: 21:35
  */
-public class AppQueryParam extends PageParam{
+public class AppQueryParam extends PageParam {
 
     /** 应用名称 */
     private String name;
