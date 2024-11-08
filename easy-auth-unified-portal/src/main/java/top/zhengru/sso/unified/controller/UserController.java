@@ -1,9 +1,11 @@
 package top.zhengru.sso.unified.controller;
 
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import top.zhengru.sso.base.entity.Result;
+import top.zhengru.sso.unified.service.impl.UserDetailImpl;
 
 /**
  * @Author: dongzhengru
@@ -20,7 +22,7 @@ public class UserController {
      * @return
      */
     @PostMapping("/info")
-    public Result<String> info() {
-        return Result.success("用户信息");
+    public Result<UserDetailImpl> info() {
+        return Result.success((UserDetailImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
     }
 }
