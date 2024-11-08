@@ -11,8 +11,6 @@ import top.zhengru.sso.unified.param.AppQueryParam;
 import top.zhengru.sso.unified.service.AppService;
 import top.zhengru.sso.unified.vo.AppInfoVo;
 
-import java.util.List;
-
 /**
  * @Author: dongzhengru
  * @Blog: blog.zhengru.top

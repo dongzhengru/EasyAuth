@@ -3,6 +3,8 @@ package top.zhengru.sso.unified.controller;
 import com.fasterxml.jackson.core.type.TypeReference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.core.Authentication;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,10 +17,17 @@ import top.zhengru.sso.base.util.HttpUtils;
 import top.zhengru.sso.base.util.JsonUtils;
 import top.zhengru.sso.client.ClientProperties;
 import top.zhengru.sso.client.constant.ClientConstant;
+import top.zhengru.sso.unified.config.EasyAuthAuthenticationToken;
+import top.zhengru.sso.unified.exception.UnifiedPortalServerException;
+import top.zhengru.sso.unified.service.UserService;
+import top.zhengru.sso.unified.service.impl.UserDetailImpl;
+import top.zhengru.sso.unified.utils.JwtUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 @RestController
 @RequestMapping("/sso")
@@ -28,6 +37,10 @@ public class SSOController {
     private StringRedisTemplate redisTemplate;
     @Autowired
     private ClientProperties clientProperties;
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private AuthenticationManager authenticationManager;
     private static final String SSO_PREFIX = "easy_auth:";
     private static final String APP_TOKEN_KEY = "server_app_token:";
 
@@ -52,7 +65,7 @@ public class SSOController {
      * @return
      */
     @RequestMapping("/auth")
-    public Result<AuthContent> auth(@RequestParam(value = BaseConstant.AUTH_CODE) String code) {
+    public Result<String> auth(@RequestParam(value = BaseConstant.AUTH_CODE) String code) {
         Map<String, String> paramMap = new HashMap<>();
         paramMap.put(BaseConstant.LOGOUT_URI, clientProperties.getLogoutUrl());
         paramMap.put(BaseConstant.APP_ID, clientProperties.getAppId());
@@ -66,8 +79,22 @@ public class SSOController {
         if (result == null) {
             return Result.error("数据解析失败");
         }
+        System.out.println("result = " + result);
         redisTemplate.opsForValue().set(SSO_PREFIX + APP_TOKEN_KEY + result.getData().getAppToken(), JsonUtils.toString(result.getData().getTokenUser()));
-        return result;
+
+        // TODO 后续优化为过滤链模式
+        Authentication authenticate = null;
+        EasyAuthAuthenticationToken easyAuthAuthenticationToken = new EasyAuthAuthenticationToken(result.getData().getTokenUser().getId(), null);
+        authenticate = authenticationManager.authenticate(easyAuthAuthenticationToken);
+        if (Objects.isNull(authenticate)) throw new UnifiedPortalServerException("登录失败");
+        UserDetailImpl userDetails = userService.queryUserDetailById(result.getData().getTokenUser().getId());
+        Map<String, Object> claims = new HashMap<>();
+        claims.put("userInfo", userDetails);
+        JwtUtils jwtUtils = new JwtUtils();
+        String token = jwtUtils.generateJwtToken(claims);
+        redisTemplate.opsForValue()
+                .set("LoginUser:" + userDetails.getUsername() + "_" + token, JsonUtils.toString(userDetails), 12, TimeUnit.HOURS);
+        return Result.success(token);
     }
 
     /**
@@ -102,17 +129,17 @@ public class SSOController {
         return Result.success();
     }
 
-    @RequestMapping("/ping")
-    public Result<String> ping(HttpServletRequest request) {
-        String token = redisTemplate.opsForValue().get(SSO_PREFIX + APP_TOKEN_KEY + request.getHeader("Authorization"));
-        if (!StringUtils.hasLength(token)) {
-            return getLoginUri(clientProperties.getServerUrl() + ClientConstant.LOGIN_URL_PATH,
-                    clientProperties.getAppId(),
-                    clientProperties.getAppSecret(),
-                    clientProperties.getDefaultCallbackUrl());
-        }
-        return Result.success("pong");
-    }
+//    @RequestMapping("/ping")
+//    public Result<String> ping(HttpServletRequest request) {
+//        String token = redisTemplate.opsForValue().get(SSO_PREFIX + APP_TOKEN_KEY + request.getHeader("Authorization"));
+//        if (!StringUtils.hasLength(token)) {
+//            return getLoginUri(clientProperties.getServerUrl() + ClientConstant.LOGIN_URL_PATH,
+//                    clientProperties.getAppId(),
+//                    clientProperties.getAppSecret(),
+//                    clientProperties.getDefaultCallbackUrl());
+//        }
+//        return Result.success("pong");
+//    }
 
     public static Result<String> getLoginUri(String reqUrl, String appId, String appSecret, String redirectUri) {
         Map<String, String> paramMap = new HashMap<>();

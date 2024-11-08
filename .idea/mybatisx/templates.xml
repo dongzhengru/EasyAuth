@@ -69,8 +69,28 @@
             <option name="tableUIInfoList">
               <list>
                 <TableUIInfo>
-                  <option name="className" value="AppApplyHistory" />
-                  <option name="tableName" value="sys_app_apply_history" />
+                  <option name="className" value="Permission" />
+                  <option name="tableName" value="sys_permission" />
+                </TableUIInfo>
+                <TableUIInfo>
+                  <option name="className" value="UserRole" />
+                  <option name="tableName" value="sys_user_role" />
+                </TableUIInfo>
+                <TableUIInfo>
+                  <option name="className" value="Menu" />
+                  <option name="tableName" value="sys_menu" />
+                </TableUIInfo>
+                <TableUIInfo>
+                  <option name="className" value="Role" />
+                  <option name="tableName" value="sys_role" />
+                </TableUIInfo>
+                <TableUIInfo>
+                  <option name="className" value="MenuRole" />
+                  <option name="tableName" value="sys_menu_role" />
+                </TableUIInfo>
+                <TableUIInfo>
+                  <option name="className" value="RolePerm" />
+                  <option name="tableName" value="sys_role_perm" />
                 </TableUIInfo>
               </list>
             </option>

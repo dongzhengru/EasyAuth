@@ -3,6 +3,9 @@ package top.zhengru.sso.unified.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 import top.zhengru.sso.unified.entity.User;
+import top.zhengru.sso.unified.vo.RoleInfoVO;
+
+import java.util.List;
 
 /**
 * @author 董政儒
@@ -12,6 +15,8 @@ import top.zhengru.sso.unified.entity.User;
 */
 @Mapper
 public interface UserMapper extends BaseMapper<User> {
+
+    List<RoleInfoVO> queryPermByUserId(Long userId);
 
 }
 

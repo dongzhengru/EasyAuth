@@ -29,4 +29,38 @@
         is_enable,create_by,update_by,
         create_time,update_time,is_deleted
     </sql>
+
+    <resultMap id="RoleInfoVoMap" type="top.zhengru.sso.unified.vo.RoleInfoVO">
+        <id property="roleName" column="roleName"/>
+        <result property="roleCode" column="roleCode"/>
+        <result property="rolePid" column="rolePid"/>
+        <collection property="permInfoVOList" ofType="top.zhengru.sso.unified.vo.PermInfoVO">
+            <id property="permission" column="permission"/>
+            <result property="permName" column="permName"/>
+            <result property="permValue" column="permValue"/>
+        </collection>
+    </resultMap>
+
+    <select id="queryPermByUserId" resultMap="RoleInfoVoMap">
+        SELECT
+            r.role_name AS roleName,
+            r.code AS roleCode,
+            r.pid AS rolePid,
+            p.permission,
+            p.name AS permName,
+            p.value AS permValue
+        FROM
+            sys_user_role ur
+                LEFT JOIN sys_role r ON r.id = ur.role_id
+                LEFT JOIN sys_role_perm rp ON r.id = rp.role_id
+                LEFT JOIN sys_permission p ON p.id = rp.permission_id
+        WHERE
+            ur.user_id = #{userId}
+          AND ur.is_deleted = 0
+          AND r.is_deleted = 0
+          AND rp.is_deleted = 0
+          AND p.is_deleted = 0
+          AND r.status = 1
+          AND p.status = 1;
+    </select>
 </mapper>

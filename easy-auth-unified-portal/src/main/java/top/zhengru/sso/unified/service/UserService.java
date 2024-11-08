@@ -1,8 +1,8 @@
 package top.zhengru.sso.unified.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import top.zhengru.sso.base.entity.TokenUser;
 import top.zhengru.sso.unified.entity.User;
+import top.zhengru.sso.unified.service.impl.UserDetailImpl;
 
 /**
 * @author 董政儒
@@ -11,4 +11,5 @@ import top.zhengru.sso.unified.entity.User;
 */
 public interface UserService extends IService<User> {
 
+    UserDetailImpl queryUserDetailById(Long userId);
 }
