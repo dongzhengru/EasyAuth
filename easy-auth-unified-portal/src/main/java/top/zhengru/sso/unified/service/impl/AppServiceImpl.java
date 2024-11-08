@@ -45,9 +45,6 @@ public class AppServiceImpl extends ServiceImpl<AppMapper, App>
     public PageResult<AppDevInfoVo> queryMyApp(AppQueryParam appQueryParam) {
         UserDetailImpl userInfo = getUserDetail();
         PageHelper.startPage(appQueryParam.getPageNo(), appQueryParam.getPageSize());
-        appQueryParam.setAuditStatus(1);
-        appQueryParam.setPublishStatus(1);
-        appQueryParam.setShelveStatus(1);
         List<AppDevInfoVo> appList = appMapper.queryApplicationDevInfoList(userInfo.getId(), appQueryParam);
         PageInfo<AppDevInfoVo> pageInfo = new PageInfo<>(appList);
         return new PageResult<>(pageInfo.getTotal(), pageInfo.getList());
