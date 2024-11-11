@@ -47,15 +47,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/captcha/get").permitAll()
-                .antMatchers("/captcha/check").permitAll()
                 .antMatchers("/sso/login").permitAll()
-                .antMatchers("/sso/auth").permitAll()
+                .antMatchers("/sso/logout").permitAll()
+                .antMatchers("/portal-login/auth").permitAll()
                 // 除上面外的所有请求全部需要鉴权认证
                 .anyRequest().authenticated()
-                .and()
-                .logout()
-                .logoutUrl("/sso/logout")
                 .and()
                 .cors();
 //                .and()

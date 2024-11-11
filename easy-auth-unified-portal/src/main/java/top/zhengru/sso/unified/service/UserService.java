@@ -1,6 +1,7 @@
 package top.zhengru.sso.unified.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import top.zhengru.sso.base.entity.TokenUser;
 import top.zhengru.sso.unified.entity.User;
 import top.zhengru.sso.unified.service.impl.UserDetailImpl;
 
@@ -11,5 +12,9 @@ import top.zhengru.sso.unified.service.impl.UserDetailImpl;
 */
 public interface UserService extends IService<User> {
 
+    String login(TokenUser tokenUser);
+
     UserDetailImpl queryUserDetailById(Long userId);
+
+    void logout();
 }
